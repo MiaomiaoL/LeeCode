@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 #-*-coding:utf-8 -*-
 
 '''
@@ -61,7 +61,7 @@ class Solution:
 
 if __name__ == '__main__':
 	nums = [5,1,4,8,3]
-	target = 8
+	target = 9
 	solution = Solution()
 	x,y = solution.twoSum(nums,target)
 	print("x：{0} \t y：{1}".format(x,y))
