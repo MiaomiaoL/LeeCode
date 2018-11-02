@@ -27,15 +27,33 @@ class Solution:
 		:type x: int
 		:rtype: int
 		"""
+		'''
+		#解法一：负数不满足
 		rev = 0
 		while x:
 			pop = x % 10
 			x = x // 10
 			rev = rev * 10 + pop
 		return rev
+		'''
+
+		#解法二
+		if -10 < x < 10:
+			return x
+		str_x = str(x)
+		if str_x[0] != '-':
+			str_x = str_x[::-1]
+			x = int(str_x)
+		else:
+			str_x = str_x[1:][::-1]
+			x = int(str_x)
+			x = -x
+		return x if -2147483648 < x < 2147483647 else 0
+
+
 
 if __name__ == '__main__':
-	x = 320
+	x = -123
 	solution = Solution()
 	rev = solution.reverse(x)
 	print(rev)
