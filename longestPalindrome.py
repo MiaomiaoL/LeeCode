@@ -73,30 +73,71 @@ class Solution:
 		if palindromic == '':
 			palindromic = s[0]
 		return palindromic
-		'''
+		
 		#解法三
-		str = '#' + '#'.join(s) + '#'
-		l = len(str)
+		tmps = '#' + '#'.join(s) + '#'
+		print(tmps)
+		l = len(tmps)
 		f = []
 		maxj = 0
 		maxl = 0
 		maxd = 0
+		palindromic = ''
 		for i in range(l):
 			if maxl > i:
 				count = min(maxl-i,int(f[2*maxj-i]/2+1))
 			else:
 				count = 1
-			while i-count >= 0 and i+count < l and str[i-count] == str[i+count]:
+			while i-count >= 0 and i+count < l and tmps[i-count] == tmps[i+count]:
 				count += 1
+			f.append(count*2-1)
+			if f[i] > maxd:
+				print(maxl,maxj,maxd,i,f[i])
+				maxd = f[i]
+				tmpl = maxd // 2
+				palindromic = tmps[i-tmpl:i + tmpl]
 			if (i-1+count) > maxl:
 				maxl,maxj = i-1+count,i
-			f.append(count*2-1)
-			maxd = max(maxd,f[i])
-		return int((maxd+1)/2)-1
+		print(maxl,maxj,maxd)
+		print(f)
+		return palindromic.replace('#','')
+
+		#解法四：
+		n = len(s)
+		maxl = 0
+		start = 0
+		for i in range(n):
+			if i - maxl >= 1 and s[i-maxl -1 : i + 1] == s[i-maxl-1:i+1][::-1]:
+				start = i-maxl-1
+				maxl += 2
+				continue
+			if i -maxl >= 0 and s[i-maxl:i+1] == s[i-maxl:i+1] == s[i-maxl:i+1][::-1]:
+				start = i - maxl
+				maxl += 1
+		return s[start:start + maxl]
+		'''
+
+		#解法五：
+		lens = len(s)
+		if lens <= 1:
+			return s
+		start,maxl,i = 0,1,0
+		while i < lens:
+			if lens - i <= maxl /2:
+				break
+			j,k = i,i
+			while k < lens -1 and s[k] == s[k+1]:
+				k += 1
+			i = k + 1
+			while k < lens -i and j and s[k+1] == s[j-1]:
+				k,j = k+1,j-1
+			if k-j+1 > maxl:
+				start,maxl = j,k-j+1
+		return s[start:start + maxl]
 
 
 if __name__ == '__main__':
-	s = 'abba'
+	s = 'cbbd'
 	solution = Solution()
 
 	palindromic = solution.longestPalindrome(s)
