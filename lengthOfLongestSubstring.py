@@ -2,7 +2,7 @@
 #-*-coding:utf-8 -*-
 
 '''
-
+题目：3、无重复字符的最长子串   lengthOfLongestSubstring 返回子串长度  findLongestNoRepeatSubstr 返回子串
 给定一个字符串，找出不含有重复字符的最长子串的长度。
 
 示例 1:
@@ -64,7 +64,7 @@ class Solution:
 		return res_list[-1]
 
 if __name__ == '__main__':
-	str = 'abdfkjkgdok'
+	str = 'pwwkew'
 	solution = Solution()
 	maxlen = solution.lengthOfLongestSubstring(str)
 	maxstr = solution.findLongestNoRepeatSubstr(str)

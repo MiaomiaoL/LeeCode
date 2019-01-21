@@ -2,6 +2,9 @@
 #-*-coding:utf-8 -*-
 
 '''
+题目：12、整数转罗马  intToRoman
+题目：13、罗马数字转整数  romanToInt
+
 罗马数字和整数互转
 
 罗马数字包含以下七种字符： I， V， X， L，C，D 和 M。
@@ -70,6 +73,18 @@ class Solution:
 		:param s: str
 		:return: int
 		"""
+		num_tuple = [1000,500,100,50,10,5,1]
+		roman_tuple = ['M','D','C','L','X','V','I']
+		merge_dic = dic(zip(roman_tuple,num_tuple))
+		num = 0
+
+		for i in range(len(s) - 1):
+			if merge_dic[s[i]] < merge_dic[s[i+1]]:
+				num -= merge_dic[s[i]]
+			else:
+				num += merge_dic[s[i]]
+		num += merge_dic[s[-1]]
+		return num
 
 if __name__ == '__main__':
 	s = Solution()
